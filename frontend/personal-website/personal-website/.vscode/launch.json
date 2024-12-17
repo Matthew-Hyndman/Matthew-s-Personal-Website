@@ -3,6 +3,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      // "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${file}",
+      "type": "chrome",
+      "url": "http://localhost:4200",
+       "webRoot": "${workspaceFolder}",
+      "outFiles": [
+          "${workspaceRoot}/out/**/*.js"
+      ],
+      "protocol": "inspector"
+  },
+    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",

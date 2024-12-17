@@ -1,34 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  pageHeader = '';
+  pageHeader: BehaviorSubject<string> = new BehaviorSubject<string>('Welcome');
 
-  constructor(private activeRoute: ActivatedRoute) { }
+  constructor() { }
 
-  getCurrentActiveRoute(): String {
-    let theRoute = this.activeRoute.pathFromRoot.map.name;
-
-    console.log(`the route ${theRoute}`);
-
-    switch (theRoute) {
-      case 'landing':
-        this.pageHeader = 'Welcome';
-        break;
-      case 'about':
-        this.pageHeader = 'About';
-        break;
-      case 'black-jack':
-        this.pageHeader = 'Black Jack';
-        break;
-      default:
-        return 'error';
-    }
-
-    return this.pageHeader;  
+  setCurrentActiveRoute(thePageHeader: string) {
+    this.pageHeader.next(thePageHeader);
+    //console.log(`pageHeader (service): ${this.pageHeader}`);
   }
 }
