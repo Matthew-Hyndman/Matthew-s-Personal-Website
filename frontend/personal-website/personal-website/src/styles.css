@@ -107,12 +107,12 @@ a,a:hover{
 
 .page-wrapper{
     overflow:hidden;
-    background:#e5e5e5;
+    background:#003789;
     padding-bottom:8vh
 }
 
 .page-container{
-    background:#e5e5e5;
+    background:#003789;
     padding-left:200px
 }
 
@@ -283,16 +283,16 @@ input.au-input.au-input-xl{
     position:relative;
     right:0;
     min-width:95px;
-    color:#fff;
-    border:1px solid #205b8d;
+    color:#000000;
+    border:1px solid #cfcfcf;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:43px;
-    background:#205b8d
+    background:#cfcfcf
 }
 
 .au-btn-submit:hover{
-    background:#05143f
+    background:#cfcfcf
 }
 
 .au-btn-submit>i{
@@ -325,7 +325,7 @@ input.au-input.au-input-xl{
 }
 
 .menu-sidebar .logo{
-    background:#fff;
+    background:#003789;
     height:75px;
     padding:0 35px;
     display:-webkit-box;
@@ -341,7 +341,7 @@ input.au-input.au-input-xl{
     -webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     -moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
-    border-right:1px solid #e5e5e5;
+    /*border-right:1px solid #e5e5e5;*/
     position:relative;
     z-index:3
 }
@@ -395,7 +395,7 @@ input.au-input.au-input-xl{
     right:0
 }
 .header-mobile .header-mobile-bar{
-    padding:15px 0;    background: #fff;
+    padding:15px 0;    background: #003789;
 }
 .header-mobile .header-mobile-inner{
     display:-webkit-box;
@@ -543,7 +543,7 @@ input.au-input.au-input-xl{
 .price{
     margin:15px 0 0;
     font-weight:800;
-    color:#0da8e4
+    color:#fff
 }
 .product-box h1{
     font-size:18px;
