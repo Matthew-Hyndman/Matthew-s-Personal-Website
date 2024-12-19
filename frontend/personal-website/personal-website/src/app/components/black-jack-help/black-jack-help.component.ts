@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-black-jack-help',
@@ -8,12 +7,11 @@ import { AppService } from '../../services/app.service';
 })
 export class BlackJackHelpComponent implements OnInit{
 
-  constructor(private appService: AppService){
+  constructor(){
 
   }
 
   ngOnInit(): void {
-    this.appService.setCurrentActiveRoute('Black Jack')
   }
 
 }

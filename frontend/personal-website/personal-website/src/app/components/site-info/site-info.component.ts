@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-site-info',
@@ -8,11 +7,10 @@ import { AppService } from '../../services/app.service';
 })
 export class SiteInfoComponent implements OnInit{
 
-  constructor(private appService: AppService){
+  constructor(){
 
   }
   ngOnInit(): void {
-    this.appService.setCurrentActiveRoute('About');
   }
 
 }

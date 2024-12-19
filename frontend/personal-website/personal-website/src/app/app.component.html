@@ -4,7 +4,7 @@
     <div class="logo">
       <a routerLink="/landing">
         <img
-          src="assets/images/logo.png"
+          src="assets\images\logo.jpg"
           alt="Matthew's Personal Website"
           class="img-responsive"
         />
@@ -14,7 +14,9 @@
     <div class="menu-sidebar-content">
       <!--nav buttons here-->
       <a routerLink="/landing">Welcome</a>
+      <br />
       <a routerLink="/site-info">About</a>
+      <br />
       <a routerLink="/black-jack">Black Jack</a>
     </div>
   </aside>
@@ -27,8 +29,9 @@
       <div class="section-content section-content-p30">
         <div class="container-fluid">
           <div class="header-wrap">
-            <!--page title here-->
-            <h1>{{ pageHeader }}</h1>
+
+            <!--top components here-->
+          
           </div>
           <div class="account-wrap"></div>
         </div>
@@ -37,7 +40,13 @@
     <!-- END HEADER DESKTOP-->
 
     <!-- MAIN CONTENT-->
-    <router-outlet></router-outlet>
+    <div class="main-content">
+      <div class="section-content section-content-p30">
+        <div class="container-fulid">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
