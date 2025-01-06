@@ -1,9 +1,12 @@
+import { randomInt } from "node:crypto";
 import { Card } from "../../../common/card";
 
 export class Deck {
     public theDeck: Card[] = undefined!;
 
     public placeHolderCard: Card = new Card('n/a', 'n/a', 0, 'public/assets/images/cards/Default_Deck/EmptySpace.jpg');
+
+    public deckSize = this.theDeck.length
 
     constructor(){
         //Clubs
@@ -66,4 +69,16 @@ export class Deck {
         this.theDeck.push(new Card('King', 'Spaeds', 10, 'public/assets/images/cards/Default_Deck/KingofSpaeds.jpg'));
         this.theDeck.push(new Card('Ace', 'Spaeds', 11, 'public/assets/images/cards/Default_Deck/SpaedsAce.jpg'));
     }
+
+    shuffle(){
+        let randomIndex: number;
+        let tempCard: Card;
+        for(let i = this.deckSize; i > 0; i--){
+            randomIndex = randomInt(this.deckSize, 0);
+            tempCard = this.theDeck[i];
+            this.theDeck[i] = this.theDeck[randomIndex];
+            this.theDeck[randomIndex] = tempCard;
+        }
+    }
+
 }
