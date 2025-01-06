@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlackJackHelpComponent implements OnInit{
 
+  isAgreedToTermsAndConditions: boolean = false;
+
   constructor(){
 
   }
@@ -14,4 +16,7 @@ export class BlackJackHelpComponent implements OnInit{
   ngOnInit(): void {
   }
 
+  setIsAgreedToTermsAndConditions(event : any){
+    this.isAgreedToTermsAndConditions = event.target.checked;
+  }
 }

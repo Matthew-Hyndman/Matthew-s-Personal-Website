@@ -9,13 +9,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SiteInfoComponent } from './components/site-info/site-info.component';
 import { BlackJackHelpComponent } from './components/black-jack-help/black-jack-help.component';
+import { BlackJackGameComponent } from './components/black-jack-game/black-jack-game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     SiteInfoComponent,
-    BlackJackHelpComponent
+    BlackJackHelpComponent,
+    BlackJackGameComponent
   ],
   imports: [
     BrowserModule,

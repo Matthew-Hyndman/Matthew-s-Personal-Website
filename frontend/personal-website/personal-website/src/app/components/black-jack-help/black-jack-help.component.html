@@ -1,1 +1,12 @@
 <h1>Black Jack rules and disclaimer</h1>
+<p>blah blah blah</p>
+<div class="input-space">
+    <label class="au-checkbox">
+      <input
+        type="checkbox"
+        (change)="setIsAgreedToTermsAndConditions($event)"
+      />
+      <span class="au-checkmark"></span>I have read, understood and agree to the above disclaimer
+    </label>
+    <input type="button" routerLink="/black-jack-game" (ended)="isAgreedToTermsAndConditions">
+  </div>
