@@ -1,8 +1,8 @@
 export class Card {
     constructor(
-        private face: string,
-        private suit: string,
-        private value: number,
-        private imageUrl: string
+        public face: string,
+        public suit: string,
+        public value: number,
+        public imageUrl: string
     ){}
 }
