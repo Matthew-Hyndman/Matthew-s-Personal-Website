@@ -9,6 +9,8 @@ import { Card } from '../../common/card';
   styleUrl: './black-jack-game.component.css'
 })
 export class BlackJackGameComponent implements OnInit {
+
+
   
   deck!: Deck;
   dealerHand!: Hand;
@@ -34,11 +36,15 @@ export class BlackJackGameComponent implements OnInit {
   }
 
   addToDealerHand(){
-    this.dealerHand.addCard(this.pickCard());
+    const newCard = this.pickCard();
+    this.dealerHand.addCard(newCard);
+    console.log(`dealer picked: [${newCard.suit}][${newCard.value}]`);
   }
 
   addToPlayerHand(){
-    this.playerHand.addCard(this.pickCard());
+    const newCard = this.pickCard();
+    this.playerHand.addCard(newCard);
+    console.log(`player picked: [${newCard.suit}][${newCard.value}]`);
   }
 
   pickCard(): Card {
@@ -47,4 +53,46 @@ export class BlackJackGameComponent implements OnInit {
     return theCard;
   }
 
+  playerPickCard() {
+    this.addToPlayerHand()
+  }
+
+  stay() {
+    const playerScore = this.playerHand.handValue;
+    let dealerScore = 0;
+    let didPlayerWin = false;
+    do{
+
+      dealerScore = this.dealerHand.handValue;
+      if (!this.isDealerScoreMoreThanPlayerScore()) {
+        
+        if (dealerScore < 21) {
+          
+          this.addToDealerHand();
+
+        } else if (dealerScore === 21){
+          
+          break;
+
+        } else {
+          
+          this.Bust();
+
+        }
+        
+      } else {
+        //set up loose behaviour and reaction
+      }
+       
+
+    }while(this.isDealerScoreMoreThanPlayerScore())
+  }
+
+  isDealerScoreMoreThanPlayerScore(): boolean{
+    return this.dealerHand.handValue < this.playerHand.handValue;
+  }
+
+  Bust(){
+
+  }
 }

@@ -8,5 +8,6 @@
       />
       <span class="au-checkmark"></span>I have read, understood and agree to the above disclaimer
     </label>
-    <input type="button" routerLink="/black-jack-game" (ended)="isAgreedToTermsAndConditions">
+    <button type="submit" class="btn btn-info" routerLink="/black-jack-game" [disabled]="!isAgreedToTermsAndConditions">Continue</button> 
+    
   </div>

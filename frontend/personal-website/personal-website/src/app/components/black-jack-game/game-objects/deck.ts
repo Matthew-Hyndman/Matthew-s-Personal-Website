@@ -1,15 +1,16 @@
-import { randomInt } from "node:crypto";
 import { Card } from "../../../common/card";
 
 export class Deck {
     public theDeck: Card[] = [];
 
     public placeHolderCard: Card = new Card('n/a', 'n/a', 0, 'public/assets/images/cards/Default_Deck/EmptySpace.jpg');
+    public cardFaceDown: Card = new Card('n/a', 'n/a', 0, 'public/assets/images/cards/Default_Deck/FaceDown.jpg');
 
-    public deckSize = this.theDeck.length
+    public deckSize;
 
     constructor(){
        this.initDeck();
+       this.deckSize = this.theDeck.length
     }
 
     private initDeck(){
@@ -30,14 +31,22 @@ export class Deck {
             {name:'Ace', value:11}
         ];
         suites.forEach(suite => 
-            values.forEach(valueObj => new Card(valueObj.name, suite, valueObj.value, `public/assets/images/cards/Default_Deck/${suite}${valueObj.name}`))
+            values.forEach(valueObj => 
+                this.theDeck.push(
+                    new Card(
+                        valueObj.name, 
+                        suite, 
+                        valueObj.value, 
+                        `assets\\images\\cards\\Default_Deck\\${suite}${valueObj.name}.jpg`)
+                    )
+                )
         );
 
     }
 
     public shuffle(){
         for(let i = this.deckSize; i > 0; i--){
-            const randomIndex = randomInt(0, i + 1);
+            const randomIndex = Math.floor(Math.random() * ((i+1) - 0 + 1) + 0);
             [this.theDeck[i], this.theDeck[randomIndex]] = [this.theDeck[randomIndex], this.theDeck[i]];            
         }
     }

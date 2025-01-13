@@ -14,6 +14,7 @@ export class BlackJackHelpComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    
   }
 
   setIsAgreedToTermsAndConditions(event : any){
