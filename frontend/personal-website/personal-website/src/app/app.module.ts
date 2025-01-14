@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SiteInfoComponent } from './components/site-info/site-info.component';
 import { BlackJackHelpComponent } from './components/black-jack-help/black-jack-help.component';
 import { BlackJackGameComponent } from './components/black-jack-game/black-jack-game.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BlackJackGameComponent } from './components/black-jack-game/black-jack-
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    SweetAlert2Module.forRoot()
     //ReactiveFormsModule
   ],
   providers: [

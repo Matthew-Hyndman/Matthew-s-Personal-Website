@@ -11,9 +11,9 @@
         alt="value: {{ card.value }}"
       />
       }
-      <h3>Score: {{dealerHand.handValue}}</h3>
+      <h3>Score: {{ dealerHand.handValue }}</h3>
     </div>
-    <hr>
+    <hr />
     <div class="card-area">
       <div class="row">
         <h3>Player</h3>
@@ -24,7 +24,7 @@
           alt="value: {{ card.value }}"
         />
         }
-        <h3>Score: {{playerHand.handValue}}</h3>
+        <h3>Score: {{ playerHand.handValue }}</h3>
       </div>
     </div>
   </div>
@@ -34,3 +34,33 @@
     <button class="game-button" (click)="stay()">Stay</button>
   </div>
 </div>
+@if (handThatWentBust.handName == 'Dealer') {
+<swal
+  title="You Win!!!"
+  text="you scored: {{ playerHand.handValue }} | dealer scored: {{
+    dealerHand.handValue
+  }}"
+  imageUrl="assets/images/trophy.png"
+  draggable="true"
+>
+</swal>
+} @else if (handThatWentBust.handName == 'Player') {
+<swal
+  title="You Lost"
+  text="you scored: {{ playerHand.handValue }} | dealer scored: {{
+    dealerHand.handValue
+  }}"
+  icon="error"
+  draggable="true"
+>
+</swal>
+} @else {
+<swal
+  title="Draw!"
+  text="you scored: {{ playerHand.handValue }} | dealer scored: {{
+    dealerHand.handValue
+  }}"
+  draggable="true"
+>
+</swal>
+}
