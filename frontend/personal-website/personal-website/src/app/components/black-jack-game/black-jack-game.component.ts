@@ -66,7 +66,7 @@ export class BlackJackGameComponent implements OnInit {
   }
 
   playerPickCard() {
-    
+    //needs logic to consider when the player has to many points to then go bust
     this.addToPlayerHand();
   }
 
