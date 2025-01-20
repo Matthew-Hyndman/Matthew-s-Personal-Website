@@ -1084,6 +1084,8 @@ footer ul li{
     border:solid 1px #000;
     background-color: #5087d9;
     color: #fff;
+    width: 8%;
+    height: fit-content;
 }
 
 .game-info-box{
@@ -1091,5 +1093,8 @@ footer ul li{
     border-radius: 3px;
     padding: 3px;
     background-color: #000;
+    color: #fff;
     font-family: "Consolas";
+    width: 8%;
+    height: fit-content;
 }

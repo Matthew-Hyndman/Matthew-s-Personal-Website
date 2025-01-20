@@ -4,7 +4,6 @@
     <div class="row">
       <h3>Dealer</h3>
       @for (card of dealerHand.cards; track card) {
-
       <img
         class="card"
         src="{{ card.imageUrl }}"
@@ -28,39 +27,14 @@
       </div>
     </div>
   </div>
-  <br />
+  <hr/>
+  
   <div class="row">
     <button class="game-button" (click)="playerPickCard()">Hit</button>
     <button class="game-button" (click)="stay()">Stay</button>
+    <label class="game-info-box">Wins: {{playerHand.wins}}</label>
+    <label class="game-info-box">Losses: {{dealerHand.wins}}</label>
   </div>
 </div>
-@if (handThatWentBust.handName == 'Dealer') {
-<swal
-  title="You Win!!!"
-  text="you scored: {{ playerHand.handValue }} | dealer scored: {{
-    dealerHand.handValue
-  }}"
-  imageUrl="assets/images/trophy.png"
-  draggable="true"
->
-</swal>
-} @else if (handThatWentBust.handName == 'Player') {
-<swal
-  title="You Lost"
-  text="you scored: {{ playerHand.handValue }} | dealer scored: {{
-    dealerHand.handValue
-  }}"
-  icon="error"
-  draggable="true"
->
-</swal>
-} @else {
-<swal
-  title="Draw!"
-  text="you scored: {{ playerHand.handValue }} | dealer scored: {{
-    dealerHand.handValue
-  }}"
-  draggable="true"
->
-</swal>
-}
+
+

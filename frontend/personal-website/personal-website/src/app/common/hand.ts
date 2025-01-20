@@ -15,5 +15,6 @@ export class Hand {
 
     emptyHand(){
         this.cards = [];
+        this.handValue = 0;
     }
 }
