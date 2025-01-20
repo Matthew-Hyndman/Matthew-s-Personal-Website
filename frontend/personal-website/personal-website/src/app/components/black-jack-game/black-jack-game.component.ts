@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Deck } from './game-objects/deck';
 import { Hand } from '../../common/hand';
 import { Card } from '../../common/card';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-black-jack-game',
