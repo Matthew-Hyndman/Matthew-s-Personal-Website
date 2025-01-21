@@ -17,4 +17,13 @@ export class Hand {
         this.cards = [];
         this.handValue = 0;
     }
+
+    toString(): string{
+        let cardsStr = '';
+        if(this.cards.length === 0){
+            return `${this.handName}, ${this.handValue}, Hand: Empty, ${this.wins}`;
+        } else {
+            return `${this.handName}, ${this.handValue}, \nHand:` + String(this.cards.forEach(card => '[' + card.toString() + ']\n')) + this.wins;
+        }
+    }
 }

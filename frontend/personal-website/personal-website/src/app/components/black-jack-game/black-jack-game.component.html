@@ -30,8 +30,8 @@
   <hr/>
   
   <div class="row">
-    <button class="game-button" (click)="playerPickCard()">Hit</button>
-    <button class="game-button" (click)="stay()">Stay</button>
+    <button class="game-button" appNoDoubleClick (click)="playerPickCard()">Hit</button>
+    <button class="game-button" appNoDoubleClick (click)="stay()">Stay</button>
     <label class="game-info-box">Wins: {{playerHand.wins}}</label>
     <label class="game-info-box">Losses: {{dealerHand.wins}}</label>
   </div>

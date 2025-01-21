@@ -3,6 +3,7 @@ import { Deck } from './game-objects/deck';
 import { Hand } from '../../common/hand';
 import { Card } from '../../common/card';
 import Swal from 'sweetalert2';
+import { NoDoubleClickDirective } from '../../directives/no-double-click.directive';
 
 @Component({
   selector: 'app-black-jack-game',
@@ -38,32 +39,50 @@ export class BlackJackGameComponent implements OnInit {
       this.dealerHand.emptyHand();
       this.playerHand.emptyHand();
     }
-    
+
     this.totalPickedCards = 0;
-    
+
     //pick one card for the dealer
     this.addToDealerHand();
 
     //pick on card for the player
     this.addToPlayerHand();
-
-    
   }
 
   addToDealerHand() {
     const newCard = this.pickCard();
-    this.dealerHand.addCard(newCard);
-    console.log(
-      `dealer picked: [${newCard.suit}][${newCard.value}][${newCard.imageUrl}]`
-    );
+    try {
+      this.dealerHand.addCard(newCard);
+      console.log(
+        `dealer picked: [${newCard.suit}][${newCard.value}][${newCard.imageUrl}]`
+      );
+    } catch (error) {
+      const errorFound = `Dealer Data:\nthe new Card [${String(newCard.toString())}], \nHand Data:\n ${String(this.dealerHand.toString())}\nerror message:\n${error}`;
+      console.log(errorFound);
+      Swal.fire({
+        title: 'Error',
+        icon: 'error',
+        text: errorFound
+      });
+    }
   }
 
   addToPlayerHand() {
     const newCard = this.pickCard();
+    try {
     this.playerHand.addCard(newCard);
     console.log(
       `player picked: [${newCard.suit}][${newCard.value}][${newCard.imageUrl}]`
     );
+  } catch (error) {
+    const errorFound = `Player Data:\nthe new Card [${String(newCard.toString())}], \nHand Data:\n ${String(this.playerHand.toString())}\nerror message:\n${error}`;
+    console.log(errorFound);
+    Swal.fire({
+      title: 'Error',
+      icon: 'error',
+      text: errorFound
+    });
+  }
   }
 
   pickCard(): Card {
@@ -80,7 +99,7 @@ export class BlackJackGameComponent implements OnInit {
     }
   }
 
-  stay() {
+   async stay() {
     const playerScore = this.playerHand.handValue;
     let dealerScore = this.dealerHand.handValue;
     do {
@@ -105,12 +124,17 @@ export class BlackJackGameComponent implements OnInit {
 
     if (dealerScore === playerScore) {
       //a draw between the player and the dealer
-      this.startNewGame();
-      Swal.fire({
+      
+      
+      await Swal.fire({
         title: 'Draw!',
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         draggable: true,
+        didClose: () => {}
       });
+
+      this.startNewGame();
+
     } else if (this.isDealerScoreMoreThanPlayerScore()) {
       //player loses
       this.Bust(this.playerHand);
@@ -124,23 +148,29 @@ export class BlackJackGameComponent implements OnInit {
     return this.dealerHand.handValue > this.playerHand.handValue;
   }
 
-  Bust(theHand: Hand) {
+  async Bust(theHand: Hand) {
     if (theHand.handName === 'Dealer') {
       this.playerHand.wins += 1;
-      Swal.fire({
-      title: 'You Win!!!',
-      text: `you scored: ${ this.playerHand.handValue } | dealer scored: ${this.dealerHand.handValue}`,
-      imageUrl: 'assets/images/trophy.png',
-      draggable: true
+      await Swal.fire({
+        title: 'You Win!!!',
+        text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
+        imageUrl: 'assets/images/trophy.png',
+        draggable: true,
+        didClose: () => {}
+
       });
+
     } else {
       this.dealerHand.wins += 1;
-      Swal.fire({
-      title:'You Lost',
-      text:`you scored: ${ this.playerHand.handValue } | dealer scored: ${this.dealerHand.handValue}`,
-      icon: 'error',
-      draggable: true
+       await Swal.fire({
+        title: 'You Lost',
+        text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
+        icon: 'error',
+        draggable: true,
+        didClose: () => {}
       });
+
+
     }
     this.handThatWentBust = theHand;
     this.startNewGame();

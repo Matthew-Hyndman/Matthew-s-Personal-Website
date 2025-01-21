@@ -11,6 +11,7 @@ import { SiteInfoComponent } from './components/site-info/site-info.component';
 import { BlackJackHelpComponent } from './components/black-jack-help/black-jack-help.component';
 import { BlackJackGameComponent } from './components/black-jack-game/black-jack-game.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { NoDoubleClickDirective } from './directives/no-double-click.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     LandingComponent,
     SiteInfoComponent,
     BlackJackHelpComponent,
-    BlackJackGameComponent
+    BlackJackGameComponent,
+    NoDoubleClickDirective
   ],
   imports: [
     BrowserModule,
