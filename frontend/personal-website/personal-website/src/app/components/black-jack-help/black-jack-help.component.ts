@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-black-jack-help',
@@ -9,8 +10,19 @@ export class BlackJackHelpComponent implements OnInit{
 
   isAgreedToTermsAndConditions: boolean = false;
 
-  constructor(){
+  //storage: Storage = localStorage;
 
+
+  constructor(private router: Router){
+    /*
+    let data = this.storage.getItem('hasUserAgreedToDisclaimer');
+
+    if(data != null){
+      if (data == 'true') {
+        router.navigate(['black-jack-game']);
+      }
+    }
+      */
   }
 
   ngOnInit(): void {
@@ -19,5 +31,6 @@ export class BlackJackHelpComponent implements OnInit{
 
   setIsAgreedToTermsAndConditions(event : any){
     this.isAgreedToTermsAndConditions = event.target.checked;
+    //this.storage.setItem('hasUserAgreedToDisclaimer', String(this.isAgreedToTermsAndConditions));
   }
 }
