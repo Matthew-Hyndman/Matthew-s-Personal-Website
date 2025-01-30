@@ -3,6 +3,7 @@ import { Deck } from './game-objects/deck';
 import { Hand } from '../../common/hand';
 import { Card } from '../../common/card';
 import Swal from 'sweetalert2';
+import { Console } from 'console';
 
 const MAX_HAND_VALUE = 21;
 
@@ -18,6 +19,8 @@ export class BlackJackGameComponent implements OnInit {
 
   totalPickedCards: number = 0;
 
+  useBettingSystem = true;
+
   isFirstGame = true;
 
   handThatWentBust!: Hand;
@@ -25,7 +28,7 @@ export class BlackJackGameComponent implements OnInit {
   pot: number = 0;
   bet: number = 0;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.startNewGame();
@@ -35,8 +38,8 @@ export class BlackJackGameComponent implements OnInit {
     this.deck = new Deck();
     this.deck.shuffle();
 
-    if(this.pot <= 0){
-      this.pot = 1000;
+    if (this.pot <= 0) {
+      this.pot = 3000;
     }
 
     if (this.isFirstGame) {
@@ -48,50 +51,58 @@ export class BlackJackGameComponent implements OnInit {
       this.playerHand.emptyHand();
     }
 
-    let betDile = this.bet;
-
-    await Swal.fire({
-      title: 'How many tokens are you betting',
-      allowOutsideClick: false,
-      draggable: true,
-      html: `
+    if (this.useBettingSystem) {
+      await Swal.fire({
+        title: 'How many tokens are you betting',
+        allowOutsideClick: false,
+        draggable: true,
+        html: `
     <input
       type="number"
       value="${this.pot}"
       step="1"
       class="swal2-input"
       id="range-value">`,
-      input: 'range',
-      inputAttributes: {
-        min: '0',
-        max: String(this.pot),
-        step: '1',
-      },
-      didOpen: () => {
-        const inputRange = Swal.getInput()!;
-        const inputNumber = Swal.getPopup()!.querySelector(
-          '#range-value'
-        ) as HTMLInputElement;
+        input: 'range',
+        inputAttributes: {
+          min: '0',
+          max: String(this.pot),
+          step: '1',
+        },
+        didOpen: () => {
+          const inputRange = Swal.getInput()!;
+          const inputNumber = Swal.getPopup()!.querySelector(
+            '#range-value'
+          ) as HTMLInputElement;
 
-        // remove default output
-        Swal.getPopup()!.querySelector('output')!.style.display = 'none';
-        inputRange.style.width = '100%';
+          // remove default output
+          Swal.getPopup()!.querySelector('output')!.style.display = 'none';
+          inputRange.style.width = '100%';
 
-        // sync input[type=number] with input[type=range]
-        inputRange.addEventListener('input', () => {
-          inputNumber.value = inputRange.value;
-          this.bet = Number(inputNumber.value);
-        });
+          // sync input[type=number] with input[type=range]
+          inputRange.addEventListener('input', () => {
+            inputNumber.value = inputRange.value;
+            this.bet = Number(inputNumber.value);
+          });
 
-        // sync input[type=range] with input[type=number]
-        inputNumber.addEventListener('change', () => {
-          inputRange.value = inputNumber.value;
-          this.bet = Number(inputNumber.value);
-        });
-      },
-    });
+          // sync input[type=range] with input[type=number]
+          inputNumber.addEventListener('change', () => {
+            inputRange.value = inputNumber.value;
+            this.bet = Number(inputNumber.value);
+          });
+        },
+        confirmButtonText: 'Place Bet',
+        showCancelButton: true,
+        cancelButtonText: 'I am not betting',
+      }).then((result) => {
+        this.useBettingSystem = result.isConfirmed;
+        console.log(`useBettingSystem: [${this.useBettingSystem}]`);
+        if (result.isConfirmed) {
+          this.pot -= this.bet
+        }
+      });
 
-    this.pot -= this.bet;
+    }
 
     this.totalPickedCards = 0;
 
@@ -159,10 +170,12 @@ export class BlackJackGameComponent implements OnInit {
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         draggable: true,
         didClose: () => {
-          this.pot += this.bet;
+
         },
       });
-
+      if (this.useBettingSystem) {
+        this.pot += this.bet;
+      }
       this.startNewGame();
     } else if (this.isDealerScoreMoreThanPlayerScore()) {
       //player loses
@@ -185,9 +198,11 @@ export class BlackJackGameComponent implements OnInit {
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         imageUrl: 'assets/images/trophy.png',
         draggable: true,
-        didClose: () => {},
+        didClose: () => { },
       });
-      this.pot += (2 * this.bet);
+      if (this.useBettingSystem) {
+        this.pot += 2 * this.bet;
+      }
     } else {
       this.dealerHand.wins += 1;
       let lossType = '';
@@ -203,10 +218,15 @@ export class BlackJackGameComponent implements OnInit {
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         icon: 'error',
         draggable: true,
-        didClose: () => {},
+        didClose: () => { },
       });
     }
     this.handThatWentBust = theHand;
+    this.startNewGame();
+  }
+
+  isBettingEnabled(event: any) {
+    this.useBettingSystem = event.target.checked;
     this.startNewGame();
   }
 }

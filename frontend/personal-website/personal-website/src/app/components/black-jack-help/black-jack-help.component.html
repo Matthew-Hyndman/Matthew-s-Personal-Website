@@ -1,13 +1,74 @@
 <h1>Black Jack rules and disclaimer</h1>
-<p>blah blah blah</p>
-<div class="input-space">
-    <label class="au-checkbox">
+<h3>Liability Disclaimer:</h3>
+<div class="col">
+  <p>
+    Please read and understand the following liability disclaimer before
+    participating in this blackjack game:
+  </p>
+
+  <p>
+    1. <strong>Non-Monetary Tokens:</strong> This game uses tokens for betting
+    purposes. These tokens do not have any real-world monetary value and cannot
+    be exchanged for cash or other goods and services outside of this game.
+  </p>
+  <p>
+    2. <strong>Entertainment Purposes Only:</strong> This blackjack game is
+    designed for entertainment and recreational purposes. Participation in this
+    game should be solely for enjoyment, and no financial gain or loss is
+    involved.
+  </p>
+  <p>
+    3. <strong>Age Requirement:</strong> Players must be at least 18 years old
+    (or the legal age of majority in your jurisdiction) to participate in this
+    game.
+  </p>
+  <p>
+    4. <strong>Responsible Gaming:</strong> Even though this game uses
+    non-monetary tokens, we encourage responsible gaming practices. Set personal
+    limits and ensure that gameplay does not interfere with your daily
+    responsibilities and well-being.
+  </p>
+  <p>
+    5. <strong>No Liability for Losses:</strong> As this game involves no real
+    money, we are not liable for any perceived losses or negative consequences
+    resulting from participation in this game.
+  </p>
+  <p>
+    6. <strong>Game Fairness:</strong> The fairness of this game is ensured by
+    random number generators (RNGs) and regulatory oversight. If you have any
+    concerns about the game's fairness, please contact the game administrators.
+  </p>
+  <p>
+    7. <strong>Changes to Rules:</strong> We reserve the right to modify or
+    update the game's rules and regulations at any time. Players are responsible
+    for staying informed about any changes.
+  </p>
+  <p>
+    By participating in this blackjack game, you acknowledge that you have read,
+    understood, and agreed to this liability disclaimer and the game's terms and
+    conditions
+  </p>
+</div>
+<div class="row input-space">
+  <label class="au-label">
+    <span class="check-box"
+      >*
       <input
+        class="check-box"
         type="checkbox"
         (change)="setIsAgreedToTermsAndConditions($event)"
       />
-      <span class="au-checkmark"></span>I have read, understood and agree to the above disclaimer
-    </label>
-    <button type="submit" class="btn btn-info" routerLink="/black-jack-game" [disabled]="!isAgreedToTermsAndConditions">Continue</button> 
-    
+      I have read, understood and agree to the above disclaimer</span
+    >
+  </label>
+  <div class="row">
+    <button
+      type="submit"
+      class="btn btn-info"
+      routerLink="/black-jack-game"
+      [disabled]="!isAgreedToTermsAndConditions"
+    >
+      Continue
+    </button>
   </div>
+</div>

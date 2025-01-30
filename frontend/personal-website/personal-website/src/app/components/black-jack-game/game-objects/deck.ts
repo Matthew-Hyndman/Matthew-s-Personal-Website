@@ -45,8 +45,9 @@ export class Deck {
     }
 
     public shuffle(){
-        for(let i = this.deckSize; i > 0; i--){
-            const randomIndex = Math.floor(Math.random() * ((i+1) - 0 + 1) + 0);
+        //the code below is creating a card that is undefined, prevent this from happening
+        for(let i = this.deckSize-1; i > 0; i--){
+            const randomIndex = Math.floor(Math.random() * (i)/*((i+1) - 0 + 1) + 0*/);
             [this.theDeck[i], this.theDeck[randomIndex]] = [this.theDeck[randomIndex], this.theDeck[i]];            
         }
     }

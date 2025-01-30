@@ -633,15 +633,22 @@ input.au-input.au-input-xl{
     border:1px solid #ccc
 }
 .au-checkbox{
-    display:block;
+    display:inline-block;
     position:relative;
     cursor:pointer;
-    font-size:22px;
+    font-size:32px;
+    /*font-size: large;*/
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none
 }
+
+.au-label{
+    color: #fff;
+    
+}
+
 .au-checkbox input{
     position:absolute;
     opacity:0;
@@ -762,8 +769,9 @@ table.table.table-bordered th{
 
  .btn-info{
     color:#fff;
-    background-color:#003789!important;
-    border-color:#003789!important
+    background-color:#03a9f4!important;
+    border-color:#205b8d
+    !important
 }
 a.primary-btn{
     background:#05143f;
@@ -1097,4 +1105,14 @@ footer ul li{
     font-family: "Consolas";
     width: 8%;
     height: fit-content;
+}
+
+.check-box{    
+    font-size: 20px;
+    color: #fff;
+}
+
+p{
+    padding-right: 20%;
+    padding-left: 20%;
 }

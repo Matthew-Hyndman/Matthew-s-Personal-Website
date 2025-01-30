@@ -34,9 +34,20 @@
     <button class="game-button" appNoDoubleClick (click)="stay()">Stay</button>
     <label class="game-info-box">Wins: {{playerHand.wins}}</label>
     <label class="game-info-box">Losses: {{dealerHand.wins}}</label>
+    @if (useBettingSystem) {
     <label class="game-info-box">Your Pot: {{pot}}</label>
     <label class="game-info-box">Your Bet: {{bet}}</label>
+    }
   </div>
+  <div class="row"><label class="au-label">
+    <span class="check-box"><input
+      type="checkbox"
+      class="au-checkbox"
+      (change)="isBettingEnabled($event)"
+      [checked] = useBettingSystem
+      
+    /> Use Betting</span>
+  </label></div>
 </div>
 
 
