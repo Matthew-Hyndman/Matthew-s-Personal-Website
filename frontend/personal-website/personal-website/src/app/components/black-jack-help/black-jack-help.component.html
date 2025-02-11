@@ -50,25 +50,28 @@
   </p>
 </div>
 <div class="row input-space">
-  <label class="au-label">
-    <span class="check-box"
-      >*
-      <input
-        class="check-box"
-        type="checkbox"
-        (change)="setIsAgreedToTermsAndConditions($event)"
-      />
-      I have read, understood and agree to the above disclaimer</span
-    >
-  </label>
-  <div class="row">
-    <button
-      type="submit"
-      class="btn btn-info"
-      routerLink="/black-jack-game"
-      [disabled]="!isAgreedToTermsAndConditions"
-    >
-      Continue
-    </button>
+  <div formGroupName="formGroup">
+    <label class="au-label">
+      <span class="check-box"
+        >*
+        <input
+          class="check-box"
+          type="checkbox"
+          formControlName="disclaimer"
+          (change)="setIsAgreedToTermsAndConditions($event)"
+        />
+        You have read, understood and agree to the above disclaimer
+      </span>
+    </label>
+    @if (disclaimer?.value == false && (disclaimer?.touched || disclaimer?.dirty)) {
+    <div class="row alert alert-danger mt-1">
+      you must tick the check box to Continue to game
+    </div>
+    }
+    <div class="row">
+      <button type="submit" class="btn btn-info" (click)="onContinue()">
+        Continue
+      </button>
+    </div>
   </div>
 </div>

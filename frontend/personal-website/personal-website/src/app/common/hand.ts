@@ -9,7 +9,12 @@ export class Hand {
     ){}
 
     addCard(theCard: Card){
-        this.handValue += theCard.value;
+        if(theCard.value == 11 && (this.handValue + theCard.value) >= 21){
+            this.handValue += 1;
+        } else {
+            this.handValue += theCard.value;
+        }
+
         this.cards.push(theCard);
     }
 
@@ -17,6 +22,16 @@ export class Hand {
         this.cards = [];
         this.handValue = 0;
     }
+
+    hasCardValue(cardValue: number): boolean {
+        return this.cards.find(card => card.value == cardValue) != null;
+    }
+
+    hasCardFace(cardFace: string): boolean {
+        return this.cards.find(card => card.face == cardFace) != null;
+    }
+
+   
 
     toString(): string{
         let cardsStr = '';

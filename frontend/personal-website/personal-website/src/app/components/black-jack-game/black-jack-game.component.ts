@@ -3,7 +3,8 @@ import { Deck } from './game-objects/deck';
 import { Hand } from '../../common/hand';
 import { Card } from '../../common/card';
 import Swal from 'sweetalert2';
-import { Console } from 'console';
+import { Router } from '@angular/router';
+import { BlackJackHelpService } from '../../services/black-jack-help.service';
 
 const MAX_HAND_VALUE = 21;
 
@@ -13,6 +14,7 @@ const MAX_HAND_VALUE = 21;
   styleUrl: './black-jack-game.component.css',
 })
 export class BlackJackGameComponent implements OnInit {
+
   deck!: Deck;
   dealerHand!: Hand;
   playerHand!: Hand;
@@ -23,15 +25,26 @@ export class BlackJackGameComponent implements OnInit {
 
   isFirstGame = true;
 
+  isDoublingDown = false;
+
   handThatWentBust!: Hand;
 
   pot: number = 0;
   bet: number = 0;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private blackJackHelpService: BlackJackHelpService
+  ) {}
 
   ngOnInit(): void {
-    this.startNewGame();
+    let theDataIsTrue = this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue();
+
+    if (theDataIsTrue) {
+      this.startNewGame();
+    } else {
+      this.router.navigate(['black-jack-help']);
+    }
   }
 
   async startNewGame() {
@@ -98,10 +111,9 @@ export class BlackJackGameComponent implements OnInit {
         this.useBettingSystem = result.isConfirmed;
         console.log(`useBettingSystem: [${this.useBettingSystem}]`);
         if (result.isConfirmed) {
-          this.pot -= this.bet
+          this.pot -= this.bet;
         }
       });
-
     }
 
     this.totalPickedCards = 0;
@@ -169,9 +181,7 @@ export class BlackJackGameComponent implements OnInit {
         title: 'Draw!',
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         draggable: true,
-        didClose: () => {
-
-        },
+        didClose: () => {},
       });
       if (this.useBettingSystem) {
         this.pot += this.bet;
@@ -190,6 +200,10 @@ export class BlackJackGameComponent implements OnInit {
     return this.dealerHand.handValue > this.playerHand.handValue;
   }
 
+  isHandBlackJack(theHand: Hand) : boolean{
+    return theHand.hasCardFace('Ace') && theHand.hasCardValue(10);          
+  }
+
   async Bust(theHand: Hand) {
     if (theHand.handName === 'Dealer') {
       this.playerHand.wins += 1;
@@ -198,10 +212,18 @@ export class BlackJackGameComponent implements OnInit {
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         imageUrl: 'assets/images/trophy.png',
         draggable: true,
-        didClose: () => { },
+        didClose: () => {},
       });
       if (this.useBettingSystem) {
-        this.pot += 2 * this.bet;
+        let payout: number = 0;
+        let payOutMultiplyer: number = (this.isHandBlackJack(this.playerHand)) ? 2.5 : 2;
+        (this.isDoublingDown) ? payout = 2 * (payOutMultiplyer * this.bet) : payout = payOutMultiplyer * this.bet;
+        
+        if((payout % 2) > 0) { 
+          payout = Math.round(payout); 
+        }
+        
+        this.pot += payout;
       }
     } else {
       this.dealerHand.wins += 1;
@@ -218,8 +240,9 @@ export class BlackJackGameComponent implements OnInit {
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         icon: 'error',
         draggable: true,
-        didClose: () => { },
+        didClose: () => {},
       });
+      if (this.isDoublingDown) { this.pot -= this.bet } 
     }
     this.handThatWentBust = theHand;
     this.startNewGame();
@@ -228,5 +251,14 @@ export class BlackJackGameComponent implements OnInit {
   isBettingEnabled(event: any) {
     this.useBettingSystem = event.target.checked;
     this.startNewGame();
+  }
+
+  doubleDown() {
+    this.isDoublingDown = true;
+    this.playerPickCard();
+    if(this.playerHand.handValue <= MAX_HAND_VALUE){
+      this.stay();
+    }
+    this.isDoublingDown = false;
   }
 }

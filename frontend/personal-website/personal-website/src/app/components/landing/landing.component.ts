@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BlackJackHelpService } from '../../services/black-jack-help.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-constructor(){
+ blckJackGameRoute: string = '';
 
-}
+  constructor(private blackJackHelpService: BlackJackHelpService) {}
 
   ngOnInit(): void {
+    if(this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue()){
+      this.blckJackGameRoute = '/black-jack-game'
+    } else {
+      this.blckJackGameRoute = '/black-jack-help'
+    }
   }
 
 }
