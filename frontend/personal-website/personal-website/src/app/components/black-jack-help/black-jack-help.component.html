@@ -63,9 +63,9 @@
         You have read, understood and agree to the above disclaimer
       </span>
     </label>
-    @if (disclaimer?.value == false && (disclaimer?.touched || disclaimer?.dirty)) {
+    @if (disclaimer?.value == false && showErrorMessage) {
     <div class="row alert alert-danger mt-1">
-      you must tick the check box to Continue to game
+      You must tick the check box to Continue to the game
     </div>
     }
     <div class="row">

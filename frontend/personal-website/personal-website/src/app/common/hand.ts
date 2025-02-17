@@ -9,7 +9,7 @@ export class Hand {
     ){}
 
     addCard(theCard: Card){
-        if(theCard.value == 11 && (this.handValue + theCard.value) >= 21){
+        if(theCard.value == 11 && (this.handValue + theCard.value) > 21){
             this.handValue += 1;
         } else {
             this.handValue += theCard.value;

@@ -88,17 +88,14 @@ export class BlackJackGameComponent implements OnInit {
             '#range-value'
           ) as HTMLInputElement;
 
-          // remove default output
           Swal.getPopup()!.querySelector('output')!.style.display = 'none';
           inputRange.style.width = '100%';
 
-          // sync input[type=number] with input[type=range]
           inputRange.addEventListener('input', () => {
             inputNumber.value = inputRange.value;
             this.bet = Number(inputNumber.value);
           });
 
-          // sync input[type=range] with input[type=number]
           inputNumber.addEventListener('change', () => {
             inputRange.value = inputNumber.value;
             this.bet = Number(inputNumber.value);
@@ -207,8 +204,17 @@ export class BlackJackGameComponent implements OnInit {
   async Bust(theHand: Hand) {
     if (theHand.handName === 'Dealer') {
       this.playerHand.wins += 1;
+
+      let winType = '';
+
+      if (this.isHandBlackJack(this.playerHand)) {
+        winType = 'Black Jack!!!';
+      } else {
+        winType = 'You Win!!!';
+      }
+
       await Swal.fire({
-        title: 'You Win!!!',
+        title: winType,
         text: `you scored: ${this.playerHand.handValue} | dealer scored: ${this.dealerHand.handValue}`,
         imageUrl: 'assets/images/trophy.png',
         draggable: true,
@@ -216,7 +222,7 @@ export class BlackJackGameComponent implements OnInit {
       });
       if (this.useBettingSystem) {
         let payout: number = 0;
-        let payOutMultiplyer: number = (this.isHandBlackJack(this.playerHand)) ? 2.5 : 2;
+        let payOutMultiplyer: number = (this.isHandBlackJack(this.playerHand)) ? 1.5 : 2;
         (this.isDoublingDown) ? payout = 2 * (payOutMultiplyer * this.bet) : payout = payOutMultiplyer * this.bet;
         
         if((payout % 2) > 0) { 

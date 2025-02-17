@@ -16,7 +16,10 @@ export class BlackJackHelpService {
   }
 
   isHasUserAgreedToDisclaimerTrue(): boolean{
-  return this.storage.getItem('hasUserAgreedToDisclaimer') == "true";
-   
+    return this.storage.getItem('hasUserAgreedToDisclaimer') == "true";
+  }
+
+  isHasUserAgreedToDisclaimerNull(): boolean{
+    return this.storage.getItem('hasUserAgreedToDisclaimer') != null;
   }
 }

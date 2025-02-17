@@ -12,7 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class BlackJackHelpComponent implements OnInit {
 
   showErrorMessage = false
-  //isAgreedToTermsAndConditions_assist_var: boolean = false;
 
   storage: Storage = sessionStorage;
 
@@ -28,22 +27,27 @@ export class BlackJackHelpComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      disclaimer: [this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue(), Validators.requiredTrue]
+      disclaimer: [false, Validators.requiredTrue]
     });
   }
 
   get disclaimer() { return this.formGroup.get('disclaimer'); }
+  //set disclaimer(accepted: boolean) {this.formGroup.setValue({ disclaimer: accepted}); }
 
   setIsAgreedToTermsAndConditions(event: any) {
+    let accepted = event.target.checked;
     this.storage.setItem(
       'hasUserAgreedToDisclaimer',
-      String(event.target.checked)
+      String(accepted)
     );
+    this.formGroup.setValue({disclaimer: accepted});
   }
 
   onContinue() {
-    if(this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue() && this.disclaimer){
+    if(this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue() && this.disclaimer?.value){
       this.router.navigate(['black-jack-game']);
-    } 
+    } else {
+      this.showErrorMessage = true;
+    }
   }
 }
