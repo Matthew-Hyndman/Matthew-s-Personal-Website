@@ -13,11 +13,16 @@
 
     <div class="menu-sidebar-content">
       <!--nav buttons here-->
-      <a class="sidebar-link" routerLink="/landing">Welcome</a>
+      @for (link of links; track link) {
+      <a class="sidebar-link" routerLink={{link.path}}>{{link.name}}</a>
+      <br />
+    }
+      
+      <!--<a class="sidebar-link" routerLink="/landing">Welcome</a>
       <br />
       <a class="sidebar-link" routerLink="/site-info">About</a>
       <br />
-      <a class="sidebar-link" routerLink="/black-jack-help">Black Jack</a>
+      <a class="sidebar-link" routerLink="/black-jack-help">Black Jack</a>-->
     </div>
   </aside>
   <!-- END MENU SIDEBAR-->
@@ -30,11 +35,7 @@
         <div class="container-fluid">
           <div class="header-wrap">
             <!--top components here-->
-            <img 
-            src="assets\images\logo-title.png" 
-            alt="title"
-            class="title-img"
-            />
+            <app-mini-nav-menu></app-mini-nav-menu>
           </div>
           <div class="account-wrap"></div>
         </div>
@@ -69,24 +70,23 @@
     </li>
     <br />
     <div class="col">
-    <p>plug-ins used</p>
-    <br />
-    <li>
-      <a href="https://fontawesome.com"
-        ><i class="fa-solid fa-font-awesome"></i
-      ></a>
-    </li>
-    <li>
-      <a href="https://getbootstrap.com"
-        ><i class="fa-brands fa-bootstrap"></i
-      ></a>
-    </li>
-    <li class="footer-image">
-      <a href="https://github.com/sweetalert2/ngx-sweetalert2">
-        <img src="assets/images/ngx-sweetalert2-logo.png" alt=""
-        
-      /></a>
-    </li>
-  </div>
+      <p>plug-ins used</p>
+      <br />
+      <li>
+        <a href="https://fontawesome.com"
+          ><i class="fa-solid fa-font-awesome"></i
+        ></a>
+      </li>
+      <li>
+        <a href="https://getbootstrap.com"
+          ><i class="fa-brands fa-bootstrap"></i
+        ></a>
+      </li>
+      <li class="footer-image">
+        <a href="https://github.com/sweetalert2/ngx-sweetalert2">
+          <img src="assets/images/ngx-sweetalert2-logo.png" alt=""
+        /></a>
+      </li>
+    </div>
   </ul>
 </footer>

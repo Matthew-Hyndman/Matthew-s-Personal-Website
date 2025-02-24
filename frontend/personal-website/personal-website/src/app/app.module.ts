@@ -12,6 +12,8 @@ import { BlackJackHelpComponent } from './components/black-jack-help/black-jack-
 import { BlackJackGameComponent } from './components/black-jack-game/black-jack-game.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NoDoubleClickDirective } from './directives/no-double-click.directive';
+import { MiniNavMenuComponent } from './components/mini-nav-menu/mini-nav-menu.component';
+import { NavLinks } from './common/nav-links';
 
 @NgModule({
   declarations: [
@@ -20,18 +22,19 @@ import { NoDoubleClickDirective } from './directives/no-double-click.directive';
     SiteInfoComponent,
     BlackJackHelpComponent,
     BlackJackGameComponent,
-    NoDoubleClickDirective
+    NoDoubleClickDirective,
+    MiniNavMenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    SweetAlert2Module.forRoot()
-    //ReactiveFormsModule
+    SweetAlert2Module.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
   ],
   bootstrap: [AppComponent]
 })
