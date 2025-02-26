@@ -63,11 +63,13 @@
         You have read, understood and agree to the above disclaimer
       </span>
     </label>
+    @if(disclaimer?.invalid && disclaimer?.dirty && disclaimer?.touched){
     @if (disclaimer?.value == false && showErrorMessage) {
     <div class="row alert alert-danger mt-1">
       You must tick the check box to Continue to the game
     </div>
     }
+  }
     <div class="row">
       <button type="submit" class="btn btn-info" (click)="onContinue()">
         Continue

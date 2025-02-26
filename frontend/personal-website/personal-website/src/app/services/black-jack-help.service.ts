@@ -1,25 +1,30 @@
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BlackJackHelpService {
+  private readonly platformId = inject(PLATFORM_ID);
 
-  /*isAgreedToTermsAndConditions: Observable<boolean> = new Observable<boolean>( data => {
-    data.next(false);
-  });*/
   storage: Storage = sessionStorage;
 
-  constructor() { 
-    
+  constructor() {}
+
+  isHasUserAgreedToDisclaimerTrue(): boolean {
+    if (isPlatformBrowser(this.platformId)) {
+      return this.storage?.getItem('hasUserAgreedToDisclaimer') == 'true';
+    }
+
+    return false;
   }
 
-  isHasUserAgreedToDisclaimerTrue(): boolean{
-    return this.storage.getItem('hasUserAgreedToDisclaimer') == "true";
-  }
+  isHasUserAgreedToDisclaimerNull(): boolean {
+    if (isPlatformBrowser(this.platformId)) {
+      return this.storage?.getItem('hasUserAgreedToDisclaimer') != null;
+    }
 
-  isHasUserAgreedToDisclaimerNull(): boolean{
-    return this.storage.getItem('hasUserAgreedToDisclaimer') != null;
+    return false;
   }
 }

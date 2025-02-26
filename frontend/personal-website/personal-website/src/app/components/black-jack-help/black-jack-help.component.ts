@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlackJackHelpService } from '../../services/black-jack-help.service';
-import { map } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-black-jack-help',
@@ -27,12 +26,11 @@ export class BlackJackHelpComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      disclaimer: [false, Validators.requiredTrue]
+      disclaimer: new FormControl(false, [Validators.requiredTrue])
     });
   }
 
   get disclaimer() { return this.formGroup.get('disclaimer'); }
-  //set disclaimer(accepted: boolean) {this.formGroup.setValue({ disclaimer: accepted}); }
 
   setIsAgreedToTermsAndConditions(event: any) {
     let accepted = event.target.checked;
