@@ -9,11 +9,10 @@ import { BlackJackHelpService } from '../../services/black-jack-help.service';
 export class LandingComponent implements OnInit {
   blckJackGameRoute: string = '';
 
-  storage: Storage = sessionStorage;
-
   constructor(private blackJackHelpService: BlackJackHelpService) {}
 
   ngOnInit(): void {
+
     if (this.blackJackHelpService.isHasUserAgreedToDisclaimerNull()) {
       if (this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue()) {
         this.blckJackGameRoute = '/black-jack-game';

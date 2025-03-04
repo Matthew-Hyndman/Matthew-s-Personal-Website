@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BlackJackHelpService } from '../../services/black-jack-help.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-black-jack-help',
@@ -9,40 +14,39 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrl: './black-jack-help.component.css',
 })
 export class BlackJackHelpComponent implements OnInit {
+  showErrorMessage = false;
 
-  showErrorMessage = false
-
-  storage: Storage = sessionStorage;
-
-  formGroup!: FormGroup;
+  blackJackHelpFromGroup!: FormGroup;
 
   constructor(
     private router: Router,
-    private blackJackHelpService: BlackJackHelpService, 
+    private blackJackHelpService: BlackJackHelpService,
     private formBuilder: FormBuilder
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.formGroup = this.formBuilder.group({
-      disclaimer: new FormControl(false, [Validators.requiredTrue])
+    this.blackJackHelpFromGroup = this.formBuilder.group({
+      blackJackHelpChildFromGroup: this.formBuilder.group({
+        disclaimer: new FormControl(false, [Validators.requiredTrue])
+      }),
     });
   }
 
-  get disclaimer() { return this.formGroup.get('disclaimer'); }
+  get disclaimer() {
+    return this.blackJackHelpFromGroup.get('blackJackHelpChildFromGroup.disclaimer');
+  }
 
   setIsAgreedToTermsAndConditions(event: any) {
     let accepted = event.target.checked;
-    this.storage.setItem(
-      'hasUserAgreedToDisclaimer',
-      String(accepted)
-    );
-    this.formGroup.setValue({disclaimer: accepted});
+    this.blackJackHelpFromGroup.setValue({blackJackHelpChildFromGroup: {disclaimer: accepted }});
+    this.blackJackHelpService.setHasUserAgreedToDisclamer(accepted);
   }
 
   onContinue() {
-    if(this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue() && this.disclaimer?.value){
+    if (
+      this.blackJackHelpService.isHasUserAgreedToDisclaimerTrue() &&
+      this.disclaimer?.value
+    ) {
       this.router.navigate(['black-jack-game']);
     } else {
       this.showErrorMessage = true;
