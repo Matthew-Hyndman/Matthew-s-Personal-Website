@@ -124,8 +124,8 @@ a:hover {
 
 .page-wrapper {
     overflow: hidden;
-    background: #003789;
-    padding-bottom: 8vh
+    background: #2B2C3C;
+    /*padding-bottom: 8vh*/
 }
 
 .page-container {
@@ -954,11 +954,12 @@ footer ul li {
         top: 88px;
         padding-left: 0
     }
-
+/*
     .page-wrapper {
         background: #e5e5e5;
         padding-bottom: 12vh
     }
+        */
 
     .main-content {
         padding-top: 50px;
@@ -1263,13 +1264,31 @@ p {
 
 .responsive-col {
     flex: 1 1 45%;
-    /* Allows two columns to sit side by side on larger screens */
     margin: 10px;
     box-sizing: border-box;
 }
 
-/* Media Queries for responsiveness */
+.mobile-navbar-link {
+    color: #fff;
+    font-style: normal;
+    text-align: center;
+    background-color: rgb(43, 44, 62);
+    border-bottom: 2px solid #fff;
+    padding-top: 3px;
+    width: 100%;
+}
+
+.header-component{
+    position: relative;
+    float: inline-start;
+}
+
 @media (max-width: 768px) {
+
+    .header-desktop{
+        
+        height: 150px;
+    }
 
     .mini-menu-button {
         display: block;

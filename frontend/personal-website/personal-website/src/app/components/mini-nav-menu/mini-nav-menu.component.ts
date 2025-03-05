@@ -8,15 +8,19 @@ import { LinkObj } from '../../common/link-obj';
   styleUrl: './mini-nav-menu.component.css',
 })
 export class MiniNavMenuComponent {
-sidebarActive = true;
+  sidebarActive = true;
 
-links!: LinkObj[];
+  links!: LinkObj[];
 
-constructor(private navLinks: NavLinks){
-  this.links = this.navLinks.links;
-}
+  constructor(private navLinks: NavLinks) {
+    this.links = this.navLinks.links;
+  }
 
   toggleSidebar() {
     this.sidebarActive = !this.sidebarActive;
+  }
+
+  selectedLink() {
+    this.sidebarActive = true;
   }
 }
