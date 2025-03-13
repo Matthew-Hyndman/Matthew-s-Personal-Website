@@ -65,6 +65,7 @@ export class BlackJackGameComponent implements OnInit {
     }
 
     if (this.useBettingSystem) {
+      this.bet = 0;
       await Swal.fire({
         title: 'How many tokens are you betting',
         allowOutsideClick: false,
@@ -77,6 +78,7 @@ export class BlackJackGameComponent implements OnInit {
       class="swal2-input"
       id="range-value">`,
         input: 'range',
+        inputValue: this.pot,
         inputAttributes: {
           min: '0',
           max: String(this.pot),
@@ -90,6 +92,9 @@ export class BlackJackGameComponent implements OnInit {
 
           Swal.getPopup()!.querySelector('output')!.style.display = 'none';
           inputRange.style.width = '100%';
+          inputRange.max = String(this.pot);
+          inputRange.value = String(this.pot);
+          this.bet = this.pot;
 
           inputRange.addEventListener('input', () => {
             inputNumber.value = inputRange.value;
@@ -152,7 +157,7 @@ export class BlackJackGameComponent implements OnInit {
 
   playerPickCard() {
     this.addToHand(this.playerHand);
-    if (this.playerHand.handValue > 21) {
+    if (this.playerHand.handValue > MAX_HAND_VALUE) {
       this.Bust(this.playerHand);
     }
   }
