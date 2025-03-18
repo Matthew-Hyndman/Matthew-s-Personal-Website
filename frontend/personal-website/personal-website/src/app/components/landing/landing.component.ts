@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BlackJackHelpService } from '../../services/black-jack-help.service';
 
 @Component({
-  selector: 'app-landing',
-  templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css',
+    selector: 'app-landing',
+    templateUrl: './landing.component.html',
+    styleUrl: './landing.component.css',
+    standalone: false
 })
 export class LandingComponent implements OnInit {
   blckJackGameRoute: string = '';

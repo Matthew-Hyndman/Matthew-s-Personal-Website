@@ -1,7 +1,8 @@
 import { Directive, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appNoDoubleClick]'
+    selector: '[appNoDoubleClick]',
+    standalone: false
 })
 export class NoDoubleClickDirective {
 

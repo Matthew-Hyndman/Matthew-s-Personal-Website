@@ -9,9 +9,10 @@ import { BlackJackHelpService } from '../../services/black-jack-help.service';
 const MAX_HAND_VALUE = 21;
 
 @Component({
-  selector: 'app-black-jack-game',
-  templateUrl: './black-jack-game.component.html',
-  styleUrl: './black-jack-game.component.css',
+    selector: 'app-black-jack-game',
+    templateUrl: './black-jack-game.component.html',
+    styleUrl: './black-jack-game.component.css',
+    standalone: false
 })
 export class BlackJackGameComponent implements OnInit {
 

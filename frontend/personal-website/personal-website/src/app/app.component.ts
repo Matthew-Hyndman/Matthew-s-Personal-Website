@@ -3,9 +3,10 @@ import { LinkObj } from './common/link-obj';
 import { NavLinks } from './common/nav-links';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    standalone: false
 })
 export class AppComponent {
   title = 'personal-website';
