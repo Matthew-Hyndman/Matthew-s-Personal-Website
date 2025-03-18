@@ -32,12 +32,12 @@
     "express": "^4.18.2",
     "personal-website": "file:",
     "rxjs": "~7.8.0",
-    "sweetalert2": "^11.15.10",
+    "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.2",
+    "@angular-devkit/build-angular": "^19.2.3",
     "@angular/cli": "^18.2.2",
     "@angular/compiler-cli": "^18.2.0",
     "@angular/localize": "^18.2.0",
