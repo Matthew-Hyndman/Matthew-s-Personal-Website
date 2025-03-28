@@ -1,15 +1,15 @@
 {
   "whyContinueWithGen1": "Prefer not to answer",
-  "projectName": "dev",
+  "projectName": "xenondev",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
-    "framework": "none",
+    "framework": "angular",
     "config": {
       "SourceDir": "src",
       "DistributionDir": "dist",
       "BuildCommand": "npm.cmd run-script build",
-      "StartCommand": "npm.cmd run-script start"
+      "StartCommand": "ng serve"
     }
   },
   "providers": [
