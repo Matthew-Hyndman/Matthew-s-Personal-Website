@@ -10,6 +10,14 @@
       "StackName": "amplify-xenondevfrontend-dev-594b4",
       "StackId": "arn:aws:cloudformation:eu-west-2:794038258075:stack/amplify-xenondevfrontend-dev-594b4/3d4d0930-0f04-11f0-a413-06f01194e0b3",
       "AmplifyAppId": "d33gtks5hx1l5l"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d33gtks5hx1l5l",
+          "type": "cicd"
+        }
+      }
     }
   }
 }
