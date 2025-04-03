@@ -1,0 +1,16 @@
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - cd frontend/xenon-dev-frontend
+        - ls
+        - ng build --configuration=production
+        
+  artifacts:
+    baseDirectory: dist/xenon-dev-frontend
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - frontend/xenon-dev-frontend/node_modules/**/*
